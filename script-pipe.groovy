@@ -1,7 +1,5 @@
 import groovy.json.JsonSlurper
-def loginRequest =   "curl -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d username=techuser -d password=Avantmoney1 https://eu1.anypoint.mulesoft.com/accounts/login".execute().text
-def slurper = new JsonSlurper().parseText(loginRequest)
-def access_token = slurper.access_token
+
 
 pipeline{
 	agent any 
@@ -9,6 +7,9 @@ pipeline{
 			stage('Login'){
 				steps{
 					script{
+						def loginRequest =   "curl -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d username=techuser -d password=Avantmoney1 https://eu1.anypoint.mulesoft.com/accounts/login".execute().text
+						def slurper = new JsonSlurper().parseText(loginRequest)
+						def access_token = slurper.access_token
 						println 'LOGIN IN ANYPOINT PLATFORM'
 		
 						println '${access_token}'
