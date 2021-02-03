@@ -1,4 +1,8 @@
 import groovy.json.JsonSlurper
+def loginRequest =   "curl -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d username=techuser -d password=Avantmoney1 https://eu1.anypoint.mulesoft.com/accounts/login".execute().text
+def slurper = new JsonSlurper().parseText(loginRequest)
+def access_token = slurper.access_token
+
 pipeline{
 	agent any 
 		stages{
@@ -7,11 +11,9 @@ pipeline{
 					script{
 						println 'LOGIN IN ANYPOINT PLATFORM'
 		
-	def loginRequest =   "curl -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d username=techuser -d password=Avantmoney1 https://eu1.anypoint.mulesoft.com/accounts/login".execute().text
+						println '${access_token}'
 
-		def slurper = new JsonSlurper().parseText(loginRequest)
-
-       def access_token = slurper.access_token
+       					
 
 					}
 
@@ -30,7 +32,7 @@ pipeline{
 
 					slurper = new JsonSlurper().parseText(request)
 
-					orgId = slurper.user.contributorOfOrganizations[0].id
+					def orgId = slurper.user.contributorOfOrganizations[0].id
 
 					print "ORG ID ${orgId}"
 
@@ -44,7 +46,7 @@ pipeline{
 					    
 					    if(slurper.data[i].name.equals("DEV")){
 					        
-					        envId = slurper.data[i].id
+					        def envId = slurper.data[i].id
 					        
 					        break;
 					        
