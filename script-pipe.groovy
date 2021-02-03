@@ -1,12 +1,12 @@
 import groovy.json.JsonSlurper
 pipeline{
-	agent any { 
+	agent any 
 		stages{
 			stage('Login'){
 				steps{
 
 								println 'LOGIN IN ANYPOINT PLATFORM'
-		}
+		
 	def loginRequest =   "curl -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d username=techuser -d password=Avantmoney1 https://eu1.anypoint.mulesoft.com/accounts/login".execute().text
 
 		def slurper = new JsonSlurper().parseText(loginRequest)
@@ -64,7 +64,7 @@ pipeline{
 
 				print slurper.total
 				println "TOTAL APIS ${slurper.total}"
-			}
-		}	
+			}			
+		}
 	}
 
