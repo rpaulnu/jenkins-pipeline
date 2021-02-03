@@ -4,7 +4,7 @@ pipeline{
 		stages{
 			stage('Login'){
 				steps{
-					step{
+					script{
 						println 'LOGIN IN ANYPOINT PLATFORM'
 		
 	def loginRequest =   "curl -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d username=techuser -d password=Avantmoney1 https://eu1.anypoint.mulesoft.com/accounts/login".execute().text
