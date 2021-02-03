@@ -4,8 +4,8 @@ pipeline{
 		stages{
 			stage('Login'){
 				steps{
-
-								println 'LOGIN IN ANYPOINT PLATFORM'
+					step{
+						println 'LOGIN IN ANYPOINT PLATFORM'
 		
 	def loginRequest =   "curl -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d username=techuser -d password=Avantmoney1 https://eu1.anypoint.mulesoft.com/accounts/login".execute().text
 
@@ -13,6 +13,9 @@ pipeline{
 
        def access_token = slurper.access_token
 
+					}
+
+								
 				}
 	
 			}
