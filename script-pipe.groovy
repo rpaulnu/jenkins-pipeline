@@ -7,7 +7,7 @@ pipeline{
 			stage('Login'){
 
 				steps{
-						def loginRequest =   "curl -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d username=user -d password=password https://eu1.anypoint.mulesoft.com/accounts/login".execute().text
+						def loginRequest =   "curl -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d username=${env.user} -d password=${env.password} https://eu1.anypoint.mulesoft.com/accounts/login".execute().text
 						def slurper = new JsonSlurper().parseText(loginRequest)
 						def access_token = slurper.access_token
 					script{
